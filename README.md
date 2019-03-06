@@ -1,2 +1,2 @@
 # Email-Admin
-This an application for email accounts administration
+This is an application for email accounts administration
