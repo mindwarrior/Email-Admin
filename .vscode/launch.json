@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Email",
+      "request": "launch",
+      "mainClass": "emailapp.Email",
+      "projectName": "Email-Admin"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Test",
+      "request": "launch",
+      "mainClass": "emailapp.Test",
+      "projectName": "Email-Admin"
+    }
+  ]
+}

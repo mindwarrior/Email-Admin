@@ -1,79 +1,80 @@
+// Java program to illustrate the 
+// concept of Abstraction 
 
-package emailapp;
+abstract class Shape {
+	String color;
 
-import java.util.Scanner;
+	// these are abstract methods
+	abstract double area();
+
+	public abstract String toString();
+
+	// abstract class can have constructor
+	public Shape(String color) {
+		System.out.println("Shape constructor called");
+		this.color = color;
+	}
+
+	// this is a concrete method
+	public String getColor() {
+		return color;
+	}
+}
+
+class Circle extends Shape {
+	double radius;
+
+	public Circle(String color, double radius) {
+
+		// calling Shape constructor
+		super(color);
+		System.out.println("Circle constructor called");
+		this.radius = radius;
+	}
+
+	@Override
+	double area() {
+		return Math.PI * Math.pow(radius, 2);
+	}
+
+	@Override
+	public String toString() {
+		return "Circle color is " + super.color + "and area is : " + area();
+	}
+
+}
+
+class Rectangle extends Shape {
+
+	double length;
+	double width;
+
+	public Rectangle(String color, double length, double width) {
+		// calling Shape constructor
+		super(color);
+		System.out.println("Rectangle constructor called");
+		this.length = length;
+		this.width = width;
+	}
+
+	@Override
+	double area() {
+		return length * width;
+	}
+
+	@Override
+	public String toString() {
+		return "Rectangle color is " + super.color + "and area is : " + area();
+	}
+
+}
 
 public class Email {
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String password;
-	private String department;
-	private int mailboxCapacity = 500;
-	private String alternateEmail;
-	private int	defaultPasswordLength = 10;
-	private String companySuffix = "awesomecompany.com";
+	public static void main(String[] args) {
+		Shape s1 = new Circle("Red", 2.2);
+		Shape s2 = new Rectangle("Yellow", 2, 4);
 
-	// constructor to recieve first and last name
-	public Email(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		System.out.println("Email created:" + this.firstName + " " + this.lastName);
-		
-		// Call a method asking for dept and return the department
-		this.department = setDepartment();
-		System.out.println("Department:" + this.department);
-		
-		// Call a method that returns a random password
-		this.password = randomPassword(defaultPasswordLength);
-		System.out.println("Your password is:" + this.password);
-		
-		// Combine elements to generate email
-		email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@" + department +"." + companySuffix;
-		System.out.println("Your Email is: " + email);
+		System.out.println(s1.toString());
+		System.out.println(s2.toString());
 	}
-
-	// Ask for the dept
-	private String setDepartment() {
-		System.out.println("DEPARTMENT CODES\n1 for Sales\n2 for Development\n3 for Accounting\n0 for none\nEnter Department code:");
-		Scanner in = new Scanner(System.in);
-		int depChoice = in.nextInt();
-		if (depChoice == 1) {
-			return "sales";
-		} else if (depChoice == 2) {
-			return "dev";
-		} else if (depChoice == 3) {
-			return "acct";
-		} else {
-			return "";
-		}
-	}
-	//Generate a random password
-	private String randomPassword(int length) {
-		String passwordSet = "ABCDEFGHIJKLMNOPQRSTUWXYZ0123456789!@#$%";
-		char[] password = new char[length];
-		for (int i=0; i<length; i++) {
-			int rand = (int) (Math.random()* passwordSet.length());
-			password[i] = passwordSet.charAt(rand);   
-			
-		}
-		return new String(password);
-	}
-	// Set the mailbox capacity
-	public void setMailboxCapacity(int capacity) {
-		this.mailboxCapacity = capacity;
-	}
-	
-	// Set alternate email
-	public void setAlternateEmail(String altEmail) {
-		this.alternateEmail = altEmail;
-		
-	}
-	// Change the password
-	public void changePassword(String password) {
-		this.password = password;
-	}
-	public int getMailboxCapacity() {return mailboxCapacity;}
-	public String getAlternateEmail() {return alternateEmail;}
-	public String getPassword() {return password;}
 }
